@@ -9,10 +9,11 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 
 var app = express();
+mongoose.connect('mongodb://localhost:27017/mongoscraper');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.engine('.handlebars', exphbs({extname: '.handlebars'}));
+app.engine('.handlebars', exphbs({defaultLayout: 'layout', extname: '.handlebars'}));
 app.set('view engine', 'handlebars');
 
 app.use(logger('dev'));
