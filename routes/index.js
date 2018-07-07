@@ -1,11 +1,9 @@
 import express from 'express';
 const router = express.Router();
-import fetchResults from '../controllers/fetch';
+import {fetchResults, homepage } from '../controllers/fetch';
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', homepage);
 
 router.get('/scrape', fetchResults)
 
