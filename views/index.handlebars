@@ -1,24 +1,23 @@
-<section class="mw7 center avenir" id="scraped-articles">
-{{#each posts }}
+<section class="mw7 center avenir bg-washed-green ph4" id="scraped-articles">
+  {{#each posts }}
   <article class="bt bb b--black-10">
-    <a class="db pv4 ph3 ph0-l no-underline black dim" href="#0">
+    <div class="db pv4 ph3 ph0-l no-underline black" href="#0">
       <div class="flex flex-column flex-row-ns">
         <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
-          <img src={{this.image}} class="db" alt={{this.title}}>
+          <a href={{this.link}}>
+            <img src={{this.image}} class="db" alt={{this.title}}>
+          </a>
         </div>
         <div class="w-100 w-60-ns pl3-ns">
-          <h1 class="f3 fw1 baskerville mt0 lh-title">{{this.title}}</h1>
-          <p class="f6 f5-l lh-copy">
-            The tech giant says it is ready to begin planning a quantum
-            computer, a powerful cpu machine that relies on subatomic particles instead
-            of transistors.
-          </p>
-          <p class="f6 lh-copy mv0">By Robin Darnell</p>
-          <button class="save">Save</button>
+          <a href={{this.link}}>
+            <h1 class="link f3 fw1 baskerville mt0 lh-title">{{this.title}}</h1>
+          </a>
+          <p class="f6 lh-copy mv0">By {{this.author}}</p>
+          <button class="save" value={{this._id}} onclick="saveArticle(this)">Save</button>
         </div>
       </div>
-    </a>
+    </div>
   </article>
-{{/each}}
-  
+  {{/each}}
+
 </section>

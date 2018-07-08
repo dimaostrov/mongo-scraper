@@ -16,8 +16,9 @@ const promise = new Promise((resolve, reject) => {
         let image = $(this).find($('.thumbnailcontainer')).attr('style').slice(22, -2);
         let title = $(this).find('h2').children().eq(1).text().trim();
         let link = $(this).find('a').attr('href');
+        let author = $(this).find($('.byline')).text();
         // let summary = getSummary(link);
-        items[i] = {image, title, link};
+        items[i] = {image, title, link, author};
       });
       resolve(items);
     }

@@ -10,7 +10,12 @@ const indexRouter = require('./routes/index');
 
 var app = express();
 mongoose.connect('mongodb://localhost:27017/mongoscraper');
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+db.once("open", function() {
+  console.log("Mongoose connection successful.");
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.handlebars', exphbs({defaultLayout: 'layout', extname: '.handlebars'}));
