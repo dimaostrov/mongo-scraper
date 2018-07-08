@@ -1,10 +1,19 @@
 import { Headline } from '../models';
+import { insertToDB } from './headline';
 
 export const getFromDB = (req, res) => {
   Headline.find({})
   .then(response => {
     res.json(response);
   })
+}
+
+export const scrapePostReturn = (req, res) => {
+  console.log('scrape post return started');
+  fetch('http://127.0.0.1:3000/scrape')
+  .then(data => data.json())
+  .then(dat => dat.map(x=> insertToDB(x)))
+  .then(b => getFromDB())
 }
 
 export const saveArticle = (req, res) => {

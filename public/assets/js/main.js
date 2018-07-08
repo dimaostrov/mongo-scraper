@@ -1,29 +1,31 @@
 const headerScrapeBtn = document.getElementById("getNewArticles");
-const viewSavedBtn = document.getElementById('viewSaved');
-const saveBtns = document.getElementsByClassName('save');
+const viewSavedBtn = document.getElementById("viewSaved");
+const saveBtns = document.getElementsByClassName("save");
 
-const scrapeNew = () => emptyFetchRender("/getfromDB")
-const getSaved = () => emptyFetchRender("/saved")
+// here we will scrape, add to db (if needed)
+// and render all in one step
+const scrapeNew = () => emptyFetchRender("/scrapepostreturn");
+const getSaved = () => emptyFetchRender("/saved");
 
-const saveArticle = (element) => {
-  console.log('user clicker on val ' + element._id)
+const saveArticle = element => {
+  console.log("user clicker on val " + element._id);
   fetch(`/saveArticle`, {
-    method: 'POST',
+    method: "POST",
     body: element._id
-  })
-  .then(response => response.json())
-}
+  }).then(response => response.json());
+};
 
 headerScrapeBtn.addEventListener("click", scrapeNew);
-viewSavedBtn.addEventListener('click', getSaved);
+viewSavedBtn.addEventListener("click", getSaved);
 
-function emptyFetchRender (url) {
+// just a general function to empty container div
+function emptyFetchRender(url) {
   let articles = document.getElementById("scraped-articles");
-    articles.innerHTML = "";
-    fetch(url)
-      .then(response => {
-        return response.json();
-      });
+  articles.innerHTML = "";
+  fetch(url).then(response => {
+    return response.json();
+  }).then(data => data.map(x => articlesTemplate(x)))
+  .then(posts => articles.innerHTML = posts)
 }
 
 const articlesTemplate = data => {
@@ -40,7 +42,10 @@ const articlesTemplate = data => {
           <h1 class="f3 link fw1 baskerville mt0 lh-title">${data.title}</h1>
           </a>
           <p class="f6 lh-copy mv0">${"By " + data.author}</p>
-          <button id="save" value=${data._id} onclick="saveArticle(this)">Save</button>
+          <button id="save" value=${
+            data._id
+          } onclick="saveArticle(this)">Save</button>
+          <button class="notes">View Notes</button>
         </div>
       </div>
     </div>

@@ -1,24 +1,33 @@
-import express from 'express';
+import express from "express";
 const router = express.Router();
-import {fetchResults, homepage } from '../controllers/fetch';
-import { getFromDB, saveArticle, savedArticles, deleteArticle, postNote, deleteNote } from '../controllers/headline';
+import { fetchResults, homepage } from "../controllers/fetch";
+import {
+  scrapePostReturn,
+  getFromDB,
+  saveArticle,
+  savedArticles,
+  deleteArticle,
+  postNote,
+  deleteNote
+} from "../controllers/headline";
 
 /* GET home page. */
-router.get('/', homepage);
+router.get("/", homepage);
 
-router.get('/getfromDB', getFromDB);
+router.get("/getfromDB", getFromDB);
 
-router.get('/scrape', fetchResults);
+router.get("/scrape", fetchResults);
 
-router.post('/saveArticle/:title', saveArticle);
+router.get("/scrapepostreturn", scrapePostReturn);
 
-router.get('/saved', savedArticles)
+router.post("/saveArticle/:title", saveArticle);
 
-router.post('/deleteArticle/:title', deleteArticle);
+router.get("/saved", savedArticles);
 
-router.post('/postNote', postNote);
+router.post("/deleteArticle/:title", deleteArticle);
 
-router.post('/deletenote', deleteNote)
+router.post("/postNote", postNote);
 
+router.post("/deletenote", deleteNote);
 
 module.exports = router;
