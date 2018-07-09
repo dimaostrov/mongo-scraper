@@ -8,15 +8,15 @@ const scrapeNew = () => emptyFetchRender("/scrapepostreturn");
 const getSaved = () => emptyFetchRender("/saved");
 
 const saveArticle = element => {
-  console.log("user clicker on val " + element._id);
-  fetch(`/saveArticle`, {
-    method: "POST",
-    body: element._id
+  console.log("user clicker on val " + element.value);
+  fetch(`/saveArticle/${element.value}`, {
+    method: "POST"
   }).then(response => response.json());
 };
 
 headerScrapeBtn.addEventListener("click", scrapeNew);
 viewSavedBtn.addEventListener("click", getSaved);
+
 
 // just a general function to empty container div
 function emptyFetchRender(url) {
