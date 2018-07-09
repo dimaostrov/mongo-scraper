@@ -20,7 +20,7 @@ router.get("/scrape", fetchResults);
 
 router.get("/scrapepostreturn", scrapePostReturn);
 
-router.post("/saveArticle/:title", saveArticle);
+router.post("/saveArticle/:id", saveArticle);
 
 router.get("/saved", savedArticles);
 

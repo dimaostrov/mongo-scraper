@@ -2,7 +2,7 @@ import { Headline } from '../models';
 import { insertToDB } from './headline';
 
 export const getFromDB = (req, res) => {
-  Headline.find({})
+  Headline.find({}).sort({_id: -1})
   .then(response => {
     res.json(response);
   })
@@ -17,13 +17,9 @@ export const scrapePostReturn = (req, res) => {
 }
 
 export const saveArticle = (req, res) => {
-  let link = req.body;
-  console.log('user is trying to save article with link of ' + link)
-  Headline.find({link: id}, function(err, article) {
-    if (err) return handleError(err);
-    article.saved = true;
-    console.log(`${article.title} has been saved`)
-  });
+  let id = req.params.id;
+  console.log('user is trying to save article with link of ' + id)
+  Headline.update({_id: id}, {saved: true}).then(result => console.log(result)).catch(err => res.json(err));
 }
 
 export const savedArticles = (req, res) => {
