@@ -1,9 +1,9 @@
-import promise from "../scripts/scrape";
-import request from "request";
-import { Headline } from "../models";
+const scrape = require("../scripts/scrape");
+const request = require("request");
+const Headline = require("../models").Headline;
 
-export const fetchResults = (req, res) => {
-  promise.then(x => {
+const fetchResults = (req, res) => {
+  scrape.then(x => {
     x.map(article => insertToDb(article));
     res.send(x);
   });
@@ -12,16 +12,17 @@ export const fetchResults = (req, res) => {
 // User hits homepage which gets the articles from the db
 // and populates new articles into db
 // via scrape.
-export const homepage = (req, res, next) => {
+const homepage = (req, res, next) => {
   getArticles.then(posts => {
     res.render("index", { posts });
   });
-  scrapeArticles.then(posts => {
-    posts.map(post => insertToDb(post));
-  })
+  scrape.then(x => {
+    x.map(article => insertToDb(article));
+    res.send(x);
+  });
 };
 
-export const insertToDb = (article) => {
+const insertToDb = (article) => {
   Headline.create({ title: article.title, image: article.image, link: article.link, author: article.author }, function(err, article){
     if(err) return err;
     console.log(`${article.title.split(0, 10)} has been saved`);
@@ -57,6 +58,12 @@ const scrapeArticles = new Promise((resolve, reject) => {
     }
   );
 });
+
+module.exports = {
+  fetchResults,
+  homepage,
+  insertToDb
+}
 /*
 const fetchResults = (req, res, next) => {
   const source = Observable.create((observer) => {

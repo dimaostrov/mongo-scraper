@@ -1,7 +1,7 @@
-import Headline from './Headline';
-import Note from './Note';
+const Headline = require('./Headline');
+const Note = require('./Note');
 
-export {
+module.exports = {
   Headline,
   Note
 }

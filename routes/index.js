@@ -1,6 +1,8 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
-import { homepage } from "../controllers/fetch";
+const homepage = require("../controllers/fetch").homepage;
+const { getFromDB, scrapePostReturn, saveArticle, savedArticles, deleteArticle, postNote, deleteNote } = require('../controllers/headline');
+const { fetchResults } = require('../controllers/fetch');
 
 /* GET home page. */
 router.get("/", homepage);
