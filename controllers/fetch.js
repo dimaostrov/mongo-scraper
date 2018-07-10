@@ -16,10 +16,11 @@ const fetchResults = (req, res) => {
 const homepage = (req, res, next) => {
   getArticles.then(posts => {
     res.render("index", { posts });
-  });
+  })
+  .catch(err=> console.log(err));
   scrapeArticles.then(posts => {
     posts.map(post => insertToDb(post));
-  })
+  }).catch(err=>console.log(err))
 };
 
 const insertToDb = (article) => {
