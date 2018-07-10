@@ -8,7 +8,7 @@
     "watch": "nodemon ./bin/www",
     "babel-node": "babel-node --presets=es2015",
     "build": "babel src -d dist",
-    "start": "node -- ./bin/www"
+    "start": "node ./bin/www"
   },
   "babel": {
     "presets": [
