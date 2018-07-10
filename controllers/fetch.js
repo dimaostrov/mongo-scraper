@@ -1,8 +1,9 @@
-import promise from "../scripts/scrape";
-import request from "request";
-import { Headline } from "../models";
+const promise = require("../scripts/scrape");
+const request = require("request");
+const { Headline } = require("../models");
 
-export const fetchResults = (req, res) => {
+
+const fetchResults = (req, res) => {
   promise.then(x => {
     x.map(article => insertToDb(article));
     res.send(x);
@@ -12,7 +13,7 @@ export const fetchResults = (req, res) => {
 // User hits homepage which gets the articles from the db
 // and populates new articles into db
 // via scrape.
-export const homepage = (req, res, next) => {
+const homepage = (req, res, next) => {
   getArticles.then(posts => {
     res.render("index", { posts });
   });
@@ -21,7 +22,7 @@ export const homepage = (req, res, next) => {
   })
 };
 
-export const insertToDb = (article) => {
+const insertToDb = (article) => {
   Headline.create({ title: article.title, image: article.image, link: article.link, author: article.author }, function(err, article){
     if(err) return err;
     console.log(`${article.title.split(0, 10)} has been saved`);
@@ -57,3 +58,9 @@ const scrapeArticles = new Promise((resolve, reject) => {
     }
   );
 });
+
+module.exports = {
+  fetchResults,
+  homepage,
+  insertToDb
+}

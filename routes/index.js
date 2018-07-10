@@ -1,7 +1,7 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
-import { fetchResults, homepage } from "../controllers/fetch";
-import {
+const { fetchResults, homepage } = require("../controllers/fetch");
+const {
   scrapePostReturn,
   getFromDB,
   saveArticle,
@@ -9,7 +9,7 @@ import {
   deleteArticle,
   postNote,
   deleteNote
-} from "../controllers/headline";
+} = require("../controllers/headline");
 
 /* GET home page. */
 router.get("/", homepage);

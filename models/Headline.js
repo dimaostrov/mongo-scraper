@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({ 
@@ -11,4 +11,4 @@ const schema = new Schema({
 
 const Headline = mongoose.model('Headline', schema);
 
-export default Headline;
+module.exports = Headline;

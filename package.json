@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon --config 1200ms --exec npm run babel-node -- ./bin/www",
+    "watch": "nodemon ./bin/www",
     "babel-node": "babel-node --presets=es2015",
     "build": "babel src -d dist",
-    "start": "babel-node -- ./bin/www"
+    "start": "node -- ./bin/www"
   },
   "babel": {
     "presets": [
