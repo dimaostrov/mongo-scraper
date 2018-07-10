@@ -1,6 +1,7 @@
 const headerScrapeBtn = document.getElementById("getNewArticles");
 const viewSavedBtn = document.getElementById("viewSaved");
 const saveBtns = document.getElementsByClassName("save");
+const deleteBtns = document.getElementsByClassName('delete');
 
 // here we will scrape, add to db (if needed)
 // and render all in one step
@@ -14,8 +15,14 @@ const saveArticle = element => {
   }).then(response => response.json());
 };
 
+const deleteArticle = element => {
+  console.log("user clicker on val " + element.value);
+  fetch(`/deleteArticle/${element.value}`, {
+    method: "POST"
+  }).then(response => response.json());
+};
+
 headerScrapeBtn.addEventListener("click", scrapeNew);
-viewSavedBtn.addEventListener("click", getSaved);
 
 
 // just a general function to empty container div

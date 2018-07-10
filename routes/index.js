@@ -24,10 +24,14 @@ router.post("/saveArticle/:id", saveArticle);
 
 router.get("/saved", savedArticles);
 
-router.post("/deleteArticle/:title", deleteArticle);
+router.post("/deleteArticle/:id", deleteArticle);
 
 router.post("/postNote", postNote);
 
 router.post("/deletenote", deleteNote);
+
+router.get('/favicon.ico', (req, res) => {
+  res.send('huy');
+})
 
 module.exports = router;

@@ -27,11 +27,17 @@ const saveArticle = (req, res) => {
 
 const savedArticles = (req, res) => {
   Headline.find({ saved: true }).then(response => {
-    res.json(response);
+    res.render("saved", { response });
   });
 };
 
-const deleteArticle = (req, res) => {};
+const deleteArticle = (req, res) => {
+  let id = req.params.id;
+  console.log("user is deleting article with link of " + id);
+  Headline.update({ _id: id }, { saved: false })
+    .then(result => console.log(result))
+    .catch(err => res.json(err));
+};
 
 const postNote = (req, res) => {};
 

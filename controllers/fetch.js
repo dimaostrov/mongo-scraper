@@ -1,9 +1,9 @@
-const promise = require("../scripts/scrape");
+const scrape = require("../scripts/scrape");
 const request = require("request");
 const { Headline } = require("../models");
 
 const fetchResults = (req, res) => {
-  promise.then(x => {
+  scrape.then(x => {
     x.map(article => insertToDb(article));
     res.send(x);
   });

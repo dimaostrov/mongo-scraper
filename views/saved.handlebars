@@ -1,0 +1,24 @@
+<section class="mw7 center avenir bg-washed-green ph4" id="scraped-articles">
+  {{#each response }}
+  <article class="bt bb b--black-10">
+    <div class="db pv4 ph3 ph0-l no-underline black" href="#0">
+      <div class="flex flex-column flex-row-ns">
+        <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
+          <a href={{this.link}}>
+            <img src={{this.image}} class="db" alt={{this.title}}>
+          </a>
+        </div>
+        <div class="w-100 w-60-ns pl3-ns">
+          <a href={{this.link}} class="link">
+            <h1 class="link f3 fw1 baskerville mt0 lh-title">{{this.title}}</h1>
+          </a>
+          <p class="f6 lh-copy mv0">By {{this.author}}</p>
+          <button class="delete" value={{this._id}} onclick="deleteArticle(this)">Delete</button>
+          <button class="notes">View Notes</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  {{/each}}
+
+</section>
