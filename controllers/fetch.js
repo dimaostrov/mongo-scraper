@@ -47,7 +47,7 @@ const getArticles = () => {
     request(
       {
         method: "GET",
-        url: "http://127.0.0.1:3000/getfromDB"
+        url: `http://127.0.0.1:${process.env.PORT}/getfromDB`
       },
       function(err, response, body, callback) {
         if (err) reject(err);
@@ -65,7 +65,7 @@ const scrapeArticles = () => {
     request(
       {
         method: "GET",
-        url: "http://127.0.0.1:3000/scrape"
+        url: `http://127.0.0.1:${process.env.PORT}/scrape`
       },
       function(err, response, body, callback) {
         if (err) reject(err);

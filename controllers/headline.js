@@ -11,7 +11,7 @@ const getFromDB = (req, res) => {
 
 const scrapePostReturn = (req, res) => {
   console.log("scrape post return started");
-  fetch("http://127.0.0.1:3000/scrape")
+  fetch(`http://127.0.0.1:${process.env.PORT}/scrape`)
     .then(data => data.json())
     .then(dat => dat.map(x => insertToDB(x)))
     .then(b => getFromDB());
