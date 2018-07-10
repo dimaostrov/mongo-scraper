@@ -1,6 +1,8 @@
 const { Headline } = require("../models");
 const { insertToDB } = require("./headline");
 
+let port = process.env.PORT || '3000';
+
 const getFromDB = (req, res) => {
   Headline.find({})
     .sort({ _id: -1 })
@@ -11,7 +13,7 @@ const getFromDB = (req, res) => {
 
 const scrapePostReturn = (req, res) => {
   console.log("scrape post return started");
-  fetch(`http://127.0.0.1:${process.env.PORT}/scrape`)
+  fetch(`http://127.0.0.1:${port}/scrape`)
     .then(data => data.json())
     .then(dat => dat.map(x => insertToDB(x)))
     .then(b => getFromDB());

@@ -2,6 +2,8 @@ const scrape = require("../scripts/scrape");
 const request = require("request");
 const { Headline } = require("../models");
 
+let port = process.env.PORT || '3000';
+
 const fetchResults = (req, res) => {
   scrape.then(x => {
     x.map(article => insertToDb(article));
@@ -47,7 +49,7 @@ const getArticles = () => {
     request(
       {
         method: "GET",
-        url: `http://127.0.0.1:${process.env.PORT}/getfromDB`
+        url: `http://127.0.0.1:${port}/getfromDB`
       },
       function(err, response, body, callback) {
         if (err) reject(err);
@@ -65,7 +67,7 @@ const scrapeArticles = () => {
     request(
       {
         method: "GET",
-        url: `http://127.0.0.1:${process.env.PORT}/scrape`
+        url: `http://127.0.0.1:${port}/scrape`
       },
       function(err, response, body, callback) {
         if (err) reject(err);
