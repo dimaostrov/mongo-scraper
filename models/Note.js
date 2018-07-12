@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
  
 var schema = new Schema({ 
- title: {type: String, required: true}, 
- description: {type: String, required: true}, 
+ body: {type: String, required: true}, 
+ headline: {type: Schema.Types.ObjectId, ref: 'Headline'}, 
 }); 
 
 const Note = mongoose.model('Note', schema);

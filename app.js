@@ -9,7 +9,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 
 var app = express();
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/mongoscraper');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/mongoscraper', { useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 

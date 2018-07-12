@@ -1,4 +1,4 @@
-const { Headline } = require("../models");
+const { Headline, Note } = require("../models");
 const { insertToDB } = require("./headline");
 
 let port = process.env.PORT || '3000';
@@ -41,7 +41,9 @@ const deleteArticle = (req, res) => {
     .catch(err => res.json(err));
 };
 
-const postNote = (req, res) => {};
+const postNote = (req, res) => {
+  
+};
 
 const deleteNote = (req, res) => {};
 

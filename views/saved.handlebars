@@ -14,7 +14,7 @@
           </a>
           <p class="f6 lh-copy mv0">By {{this.author}}</p>
           <button class="delete" value={{this._id}} onclick="deleteArticle(this)">Delete</button>
-          <button class="notes">View Notes</button>
+          <button class="notes" data-micromodal-trigger="modal-1" onclick="viewNotes(this)">View Notes</button>
         </div>
       </div>
     </div>
@@ -22,3 +22,7 @@
   {{/each}}
 
 </section>
+
+{{#each response}}
+  {{> notes}}
+{{/each}}

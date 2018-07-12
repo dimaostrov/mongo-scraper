@@ -1,12 +1,26 @@
 const headerScrapeBtn = document.getElementById("getNewArticles");
 const viewSavedBtn = document.getElementById("viewSaved");
 const saveBtns = document.getElementsByClassName("save");
-const deleteBtns = document.getElementsByClassName('delete');
+const deleteBtns = document.getElementsByClassName("delete");
+const notes = document.getElementsByClassName("notes");
 
+const MicroModal = require('micromodal');
+MicroModal.init();
 // here we will scrape, add to db (if needed)
 // and render all in one step
 const scrapeNew = () => emptyFetchRender("/scrapepostreturn");
 const getSaved = () => emptyFetchRender("/saved");
+
+const viewNotes = element => {
+  let parent = element.parentElement;
+  let modal = document.createElement('div');
+  modal.innerHTML = `<form class="pa4 black-80">
+  <div>
+    <textarea id="comment" name="comment" class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="comment-desc"></textarea>
+  </div>
+</form>`;
+  parent.appendChild(modal);
+};
 
 const saveArticle = element => {
   console.log("user clicker on val " + element.value);
@@ -24,15 +38,16 @@ const deleteArticle = element => {
 
 headerScrapeBtn.addEventListener("click", scrapeNew);
 
-
 // just a general function to empty container div
 function emptyFetchRender(url) {
   let articles = document.getElementById("scraped-articles");
   articles.innerHTML = "";
-  fetch(url).then(response => {
-    return response.json();
-  }).then(data => data.map(x => articlesTemplate(x)))
-  .then(posts => articles.innerHTML = posts)
+  fetch(url)
+    .then(response => {
+      return response.json();
+    })
+    .then(data => data.map(x => articlesTemplate(x)))
+    .then(posts => (articles.innerHTML = posts));
 }
 
 const articlesTemplate = data => {

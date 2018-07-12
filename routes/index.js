@@ -26,9 +26,9 @@ router.get("/saved", savedArticles);
 
 router.post("/deleteArticle/:id", deleteArticle);
 
-router.post("/postNote", postNote);
+router.post("/postNote/:id", postNote);
 
-router.post("/deletenote", deleteNote);
+router.post("/deletenote/:note_id/:post_id", deleteNote);
 
 router.get('/favicon.ico', (req, res) => {
   res.send('huy');
