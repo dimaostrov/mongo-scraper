@@ -8,7 +8,8 @@ const {
   savedArticles,
   deleteArticle,
   postNote,
-  deleteNote
+  deleteNote,
+  getNotes
 } = require("../controllers/headline");
 
 /* GET home page. */
@@ -26,12 +27,14 @@ router.get("/saved", savedArticles);
 
 router.post("/deleteArticle/:id", deleteArticle);
 
-router.post("/postNote/:id", postNote);
+router.get('/notes/:article_id', getNotes);
 
-router.post("/deletenote/:note_id/:post_id", deleteNote);
+router.post("/postNote/:article_id", postNote);
+
+router.post("/deletenote/:note_id", deleteNote);
 
 router.get('/favicon.ico', (req, res) => {
-  res.send('huy');
+  res.send('foo');
 })
 
 module.exports = router;

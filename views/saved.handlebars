@@ -13,8 +13,22 @@
             <h1 class="link f3 fw1 baskerville mt0 lh-title">{{this.title}}</h1>
           </a>
           <p class="f6 lh-copy mv0">By {{this.author}}</p>
-          <button class="delete" value={{this._id}} onclick="deleteArticle(this)">Delete</button>
-          <button class="notes" data-micromodal-trigger="modal-1" onclick="viewNotes(this)">View Notes</button>
+          <button class="butn delete" value={{this._id}} onclick="deleteArticle(this)">Delete</button>
+          <button class="butn notes trigger">View Notes</button>
+          <div class="modal">
+            <div class="modal-content">
+              <span class="close-button">&times;</span>
+              <div id="notesDB"></div>
+              <h1>Notes</h1>
+              {{#each this.notes}}
+                {{> notes }}
+              {{/each}}
+              <form action="submit" value={{this._id}} onsubmit="submitNote(this)">
+                <label for="note">Input Note</label>
+                <input type="textarea" name="note" />
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -22,7 +36,3 @@
   {{/each}}
 
 </section>
-
-{{#each response}}
-  {{> notes}}
-{{/each}}

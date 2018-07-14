@@ -6,6 +6,10 @@ const schema = new Schema({
  image: {type: String, required: true, unique: true},
  link: {type: String, required: true, unique: true},
  author: {type: String, required: true},
+ notes: [{
+   type: Schema.Types.ObjectId,
+   ref: "Note"
+ }],
  saved: {type: Boolean, default: false} 
 }); 
 

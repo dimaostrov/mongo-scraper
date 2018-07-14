@@ -4,8 +4,6 @@ const saveBtns = document.getElementsByClassName("save");
 const deleteBtns = document.getElementsByClassName("delete");
 const notes = document.getElementsByClassName("notes");
 
-const MicroModal = require('micromodal');
-MicroModal.init();
 // here we will scrape, add to db (if needed)
 // and render all in one step
 const scrapeNew = () => emptyFetchRender("/scrapepostreturn");
@@ -27,6 +25,7 @@ const saveArticle = element => {
   fetch(`/saveArticle/${element.value}`, {
     method: "POST"
   }).then(response => response.json());
+  window.location.reload(true)
 };
 
 const deleteArticle = element => {
@@ -34,7 +33,17 @@ const deleteArticle = element => {
   fetch(`/deleteArticle/${element.value}`, {
     method: "POST"
   }).then(response => response.json());
+  window.location.reload(true);
 };
+
+const submitNote = element => {
+  fetch(`/postNote/${element.value}`, {
+    method: "POST",
+    body: {
+      note
+    }
+  }).then(response => response.json());
+}
 
 headerScrapeBtn.addEventListener("click", scrapeNew);
 

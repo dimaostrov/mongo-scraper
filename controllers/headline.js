@@ -6,6 +6,7 @@ let port = process.env.PORT || '3000';
 const getFromDB = (req, res) => {
   Headline.find({})
     .sort({ _id: -1 })
+    .populate("notes")
     .then(response => {
       res.json(response);
     });
@@ -28,7 +29,7 @@ const saveArticle = (req, res) => {
 };
 
 const savedArticles = (req, res) => {
-  Headline.find({ saved: true }).then(response => {
+  Headline.find({ saved: true }).sort({_id: -1}).populate('notes').then(response => {
     res.render("saved", { response });
   });
 };
@@ -36,19 +37,38 @@ const savedArticles = (req, res) => {
 const deleteArticle = (req, res) => {
   let id = req.params.id;
   console.log("user is deleting article with link of " + id);
-  Headline.update({ _id: id }, { saved: false })
+  Headline.update({ _id: id }, { saved: false, notes: [] })
     .then(result => console.log(result))
     .catch(err => res.json(err));
 };
 
-const postNote = (req, res) => {
-  
+const getNotes = (req, res) => {
+  const { article_id } = req.params.article_id;
+  Headline.find({_id: article_id})
+  .populate('notes')
+  .then(data => res.json(data))
 };
 
-const deleteNote = (req, res) => {};
+const postNote = (req, res) => {
+  const note = new Note({
+    body: req.body.text,
+    headline: req.params.id
+  });
+  note.save((err, entry) => {
+    if (err) console.log(err);
+    Headline.findOneAndUpdate({_id: req.params.id}, {$push: {notes: entry}})
+  })
+};
+
+const deleteNote = (req, res) => {
+  Note.deleteOne({ _id: req.params.note_id}, function(err, res){
+    res.end('successful');
+  })
+};
 
 module.exports = {
   getFromDB,
+  getNotes,
   scrapePostReturn,
   saveArticle,
   savedArticles,
