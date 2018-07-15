@@ -1,38 +1,5 @@
 <section class="mw7 center avenir bg-washed-green ph4" id="scraped-articles">
-  {{#each response }}
-  <article class="bt bb b--black-10">
-    <div class="db pv4 ph3 ph0-l no-underline black" href="#0">
-      <div class="flex flex-column flex-row-ns">
-        <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
-          <a href={{this.link}}>
-            <img src={{this.image}} class="db" alt={{this.title}}>
-          </a>
-        </div>
-        <div class="w-100 w-60-ns pl3-ns">
-          <a href={{this.link}} class="link">
-            <h1 class="link f3 fw1 baskerville mt0 lh-title">{{this.title}}</h1>
-          </a>
-          <p class="f6 lh-copy mv0">By {{this.author}}</p>
-          <button class="butn delete" value={{this._id}} onclick="deleteArticle(this)">Delete</button>
-          <button class="butn notes trigger">View Notes</button>
-          <div class="modal">
-            <div class="modal-content">
-              <span class="close-button">&times;</span>
-              <div id="notesDB"></div>
-              <h1>Notes</h1>
-              {{#each this.notes}}
-                {{> notes }}
-              {{/each}}
-              <form action="submit" value={{this._id}} onsubmit="submitNote(this)">
-                <label for="note">Input Note</label>
-                <input type="textarea" name="note" />
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </article>
-  {{/each}}
-
+  <div id="articles"></div>
+  <script src="/assets/js/mithril.js"></script>
+  <script src="/assets/js/savedarticles.js"></script>
 </section>
