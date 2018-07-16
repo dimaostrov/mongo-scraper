@@ -1,15 +1,18 @@
-const scrape = require("../scripts/scrape");
+// const scrape = require("../scripts/scrape");
 const request = require("request");
 const { Headline } = require("../models");
 
 let port = process.env.PORT || '3000';
 
+/*
 const fetchResults = (req, res) => {
   scrape.then(x => {
     x.map(article => insertToDb(article));
     res.send(x);
   });
 };
+*/
+
 
 // User hits homepage which gets the articles from the db
 // and populates new articles into db
@@ -20,12 +23,13 @@ const homepage = (req, res, next) => {
       res.render("index", { posts });
     })
     .catch(err => console.log(err));
-  scrapeArticles()
+  /*
+    scrapeArticles()
     .then(posts => {
       posts.map(post => insertToDb(post));
     })
     .catch(err => console.log(err));
-
+*/
   };
 
 const insertToDb = article => {
@@ -62,6 +66,7 @@ const getArticles = () => {
 };
 
 // scrape articles
+/*
 const scrapeArticles = () => {
   let action = new Promise((resolve, reject) => {
     request(
@@ -78,9 +83,9 @@ const scrapeArticles = () => {
   });
   return action;
 };
-
+*/
 module.exports = {
-  fetchResults,
+  // fetchResults,
   homepage,
   insertToDb
 };

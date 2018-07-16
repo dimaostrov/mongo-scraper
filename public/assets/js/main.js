@@ -25,7 +25,6 @@ const saveArticle = element => {
   fetch(`/saveArticle/${element.value}`, {
     method: "POST"
   }).then(response => response.json());
-  window.location.reload(true)
 };
 
 const deleteArticle = element => {

@@ -18,7 +18,7 @@ router.get("/", homepage);
 
 router.get("/getfromDB", getFromDB);
 
-router.get("/scrape", fetchResults);
+// router.get("/scrape", fetchResults);
 
 router.get("/scrapepostreturn", scrapePostReturn);
 

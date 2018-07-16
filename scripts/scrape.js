@@ -2,6 +2,7 @@ const cheerio = require("cheerio");
 const request = require("request");
 // import SummaryTool from 'node-summary';
 
+/*
 const scrape = new Promise((resolve, reject) => {
   request(
     {
@@ -33,5 +34,7 @@ const getSummary = (url) => {
     resolve(summary);
   })
 }
+
+*/
 
 module.exports = scrape;

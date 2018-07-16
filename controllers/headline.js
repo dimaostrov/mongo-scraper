@@ -29,13 +29,13 @@ const saveArticle = (req, res) => {
 };
 
 const savedArticles = (req, res) => {
-  Headline.find({ saved: true }).sort({_id: -1}).populate('notes').then(response => {
+  Headline.find({ saved: true }).sort({_id: -1}).populate('notes').select('title').then(response => {
     res.render("saved", { response });
   });
 };
 
 const savedJSON = (req, res) => {
-  Headline.find({ saved: true }).sort({_id: -1}).populate('notes').then(response => {
+  Headline.find({ saved: true }).sort({_id: -1}).then(response => {
     res.json(response);
   });
 }
@@ -59,15 +59,17 @@ const getNotes = (req, res) => {
 const postNote = (req, res) => {
   console.log(req.params.article_id);
   console.log(req.body);
-  const note = new Note({
+  const note = {
     body: req.body.text,
     headline: req.params.article_id
-  });
-  note.save((err, entry) => {
-    if (err) console.log(err);
-    Headline.findOneAndUpdate({_id: req.params.id}, {$push: {notes: entry}})
+  };
+  Note.create(note)
+  .then( result => {
+    Headline.findOneAndUpdate({_id: req.params.id}, {$push: {notes: result._id}}, {new:true })
+    .then( data => res.json(result))
+    .catch(err => res.json(err));
   })
-  res.end('success');
+  .catch(err => res.json(err));
 };
 
 const deleteNote = (req, res) => {
