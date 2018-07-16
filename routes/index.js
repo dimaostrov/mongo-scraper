@@ -6,6 +6,7 @@ const {
   getFromDB,
   saveArticle,
   savedArticles,
+  savedJSON,
   deleteArticle,
   postNote,
   deleteNote,
@@ -24,6 +25,8 @@ router.get("/scrapepostreturn", scrapePostReturn);
 router.post("/saveArticle/:id", saveArticle);
 
 router.get("/saved", savedArticles);
+
+router.get('/savedjson', savedJSON);
 
 router.post("/deleteArticle/:id", deleteArticle);
 
