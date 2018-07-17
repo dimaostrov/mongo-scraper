@@ -49,11 +49,14 @@ const deleteArticle = (req, res) => {
 };
 
 const getNotes = (req, res) => {
-  const { article_id } = req.params.article_id;
-  Headline.find({_id: article_id}, (err, data) => {
-    res.json(data);
+  let { article_id } = req.params;
+  console.log(article_id);
+  Headline.find({_id: article_id})
+  .populate('notes')
+  .exec((err, art) => {
+    if(err){return res.json(err)};
+    res.json(art)
   })
-  
 };
 
 const postNote = (req, res) => {
@@ -65,7 +68,7 @@ const postNote = (req, res) => {
   };
   Note.create(note)
   .then( result => {
-    Headline.findOneAndUpdate({_id: req.params.id}, {$push: {notes: result._id}}, {new:true })
+    Headline.findOneAndUpdate({_id: req.params.article_id}, {$push: {notes: result._id}}, {new:true })
     .then( data => res.json(result))
     .catch(err => res.json(err));
   })
